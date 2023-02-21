@@ -8,6 +8,8 @@
 #include "jarvis_decoder.h"
 #include "uplift_decoder.h"
 #include "omnidesk_decoder.h"
+#include "autonomous_decoder.h"
+
 
 namespace esphome {
 namespace standing_desk_height {

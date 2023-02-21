@@ -12,6 +12,7 @@ DECODER_VARIANTS = [
     "uplift",
     "jarvis",
     "omnidesk",
+    "autonomous",
 ]
 
 CONFIG_SCHEMA = (
