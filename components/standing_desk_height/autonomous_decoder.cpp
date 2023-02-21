@@ -1,4 +1,5 @@
 #include "autonomous_decoder.h"
+#include "esphome.h"
 
 namespace esphome {
 namespace standing_desk_height {
@@ -7,7 +8,6 @@ namespace standing_desk_height {
 // Which, despite the name, works for Uplift desks too
 bool AutonomousDecoder::put(uint8_t b) {
   ESP_LOGD("AutonomousDecoder::put", "put called"); 
-  UARTDebug::log_string(direction, bytes) 
   switch (state_) {
   case SYNC1:
     if (b == 0x98) {
