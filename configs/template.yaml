@@ -18,12 +18,12 @@ substitutions:
 #    sequence:
 #      - lambda: UARTDebug::log_hex(uart::UART_DIRECTION_RX, bytes, ':');    
 
-sensor:
-  - platform: standing_desk_height
-    id: desk_height
-    name: ${desk_height_name}
-    unit_of_measurement: ${standing_desk_height_units}
-    variant: ${standing_desk_variant}
+# sensor:
+#   - platform: standing_desk_height
+#     id: desk_height
+#     name: ${desk_height_name}
+#     unit_of_measurement: ${standing_desk_height_units}
+#     variant: ${standing_desk_variant}
 
 output:
   - platform: gpio
