@@ -59,8 +59,15 @@ bool AutonomousDecoder::put(uint8_t b) {
     ESP_LOGD("AutonomousDecoder::put", "HEIGHT2"); 
     buf_[1] = b;
     state_ = SYNC1;
-    ESP_LOGD("AutonomousDecoder::put-buf_[1]", "put-buf_[1] %010ld",  (buf_[1] << 8) ); 
-    return true;
+    if (buf_[0] == buf_[1]){
+      ESP_LOGD("AutonomousDecoder::put", "buf_[0] and buf_[1] are the same %010ld",  buf_[0]); 
+      return true;
+    }else{
+      ESP_LOGD("AutonomousDecoder::put", "buf_[0] and  are diffrent  buf_[1]: %010ld",  buf_[1]); 
+      state_ = SYNC1;
+      return false;
+    }
+    return false;
   default:
     return false;
   }
