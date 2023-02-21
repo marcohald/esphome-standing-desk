@@ -59,7 +59,7 @@ bool AutonomousDecoder::put(uint8_t b) {
     ESP_LOGD("AutonomousDecoder::put", "HEIGHT2"); 
     buf_[1] = b;
     state_ = SYNC1;
-    ESP_LOGD("AutonomousDecoder::put-buf_[1]", "put-buf_[1] %010ld",  buf_[1] << 8) ); 
+    ESP_LOGD("AutonomousDecoder::put-buf_[1]", "put-buf_[1] %010ld",  (buf_[1] << 8) ); 
     return true;
   default:
     return false;
