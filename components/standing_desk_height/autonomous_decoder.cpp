@@ -7,7 +7,7 @@ namespace standing_desk_height {
 // Implementation based off of: https://github.com/rmcgibbo/Jarvis
 // Which, despite the name, works for Uplift desks too
 bool AutonomousDecoder::put(uint8_t b) {
-  ESP_LOGD("AutonomousDecoder::put", "put called"); 
+  ESP_LOGV("AutonomousDecoder::put", "put called"); 
   switch (state_) {
   case SYNC1:
     if (b == 0x98) {
@@ -42,12 +42,12 @@ bool AutonomousDecoder::put(uint8_t b) {
       return false;
     }
   case HEIGHT1:
-    ESP_LOGD("AutonomousDecoder::put", "HEIGHT1"); 
+    ESP_LOGV("AutonomousDecoder::put", "HEIGHT1"); 
     //if (b == 0x00 || b == 0x01) {
     buf_[0] = b;
 
-    // ESP_LOGD("AutonomousDecoder::put-buf_[0]", "put-buf_[0] %02x",  buf_[0]); 
-    ESP_LOGD("AutonomousDecoder::put-buf_[0]", "put-buf_[0] %010ld",  buf_[0]); 
+    // ESP_LOGV("AutonomousDecoder::put-buf_[0]", "put-buf_[0] %02x",  buf_[0]); 
+    ESP_LOGV("AutonomousDecoder::put-buf_[0]", "put-buf_[0] %010ld",  buf_[0]); 
     
     state_ = HEIGHT2;
     return false;
@@ -56,14 +56,14 @@ bool AutonomousDecoder::put(uint8_t b) {
     //  return false;
     //}
   case HEIGHT2:
-    ESP_LOGD("AutonomousDecoder::put", "HEIGHT2"); 
+    ESP_LOGV("AutonomousDecoder::put", "HEIGHT2"); 
     buf_[1] = b;
     state_ = SYNC1;
     if (buf_[0] == buf_[1]){
-      ESP_LOGD("AutonomousDecoder::put", "buf_[0] and buf_[1] are the same %010ld",  buf_[0]); 
+      ESP_LOGV("AutonomousDecoder::put", "buf_[0] and buf_[1] are the same %010ld",  buf_[0]); 
       return true;
     }else{
-      ESP_LOGD("AutonomousDecoder::put", "buf_[0] and  are diffrent  buf_[1]: %010ld",  buf_[1]); 
+      ESP_LOGV("AutonomousDecoder::put", "buf_[0] and  are diffrent  buf_[1]: %010ld",  buf_[1]); 
       state_ = SYNC1;
       return false;
     }
@@ -75,7 +75,7 @@ bool AutonomousDecoder::put(uint8_t b) {
 }
 
 float AutonomousDecoder::decode() {
-  ESP_LOGD("AutonomousDecoder::decode", "decode called"); 
+  ESP_LOGV("AutonomousDecoder::decode", "decode called"); 
   return (buf_[0]);
 }
 
