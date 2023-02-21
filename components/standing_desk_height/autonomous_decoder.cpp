@@ -6,6 +6,8 @@ namespace standing_desk_height {
 // Implementation based off of: https://github.com/rmcgibbo/Jarvis
 // Which, despite the name, works for Uplift desks too
 bool AutonomousDecoder::put(uint8_t b) {
+  ESP_LOGD("AutonomousDecoder::put", "put called"); 
+  UARTDebug::log_string(direction, bytes) 
   switch (state_) {
   case SYNC1:
     if (b == 0x98) {
@@ -40,17 +42,22 @@ bool AutonomousDecoder::put(uint8_t b) {
       return false;
     }
   case HEIGHT1:
-    if (b == 0x00 || b == 0x01) {
-      buf_[0] = b;
-      state_ = HEIGHT2;
-      return false;
-    } else {
-      state_ = SYNC1;
-      return false;
-    }
+    ESP_LOGD("AutonomousDecoder::put", "HEIGHT1"); 
+    //if (b == 0x00 || b == 0x01) {
+    buf_[0] = b;
+
+    ESP_LOGD("AutonomousDecoder::put-buf_[0]", buf_[0]); 
+    state_ = HEIGHT2;
+    return false;
+    //} else {
+    //  state_ = SYNC1;
+    //  return false;
+    //}
   case HEIGHT2:
+    ESP_LOGD("AutonomousDecoder::put", "HEIGHT2"); 
     buf_[1] = b;
     state_ = SYNC1;
+    ESP_LOGD("AutonomousDecoder::put-buf_[1]", buf_[1]); 
     return true;
   default:
     return false;
@@ -59,6 +66,7 @@ bool AutonomousDecoder::put(uint8_t b) {
 }
 
 float AutonomousDecoder::decode() {
+  ESP_LOGD("AutonomousDecoder::decode", "decode called"); 
   return (buf_[1] & 0xFF);
 }
 
