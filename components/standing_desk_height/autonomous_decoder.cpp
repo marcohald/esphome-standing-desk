@@ -76,7 +76,7 @@ bool AutonomousDecoder::put(uint8_t b) {
 
 float AutonomousDecoder::decode() {
   ESP_LOGD("AutonomousDecoder::decode", "decode called"); 
-  return (buf_[1] & 0xFF);
+  return (buf_[0]);
 }
 
 }
