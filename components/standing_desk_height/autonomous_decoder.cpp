@@ -17,7 +17,7 @@ bool AutonomousDecoder::put(uint8_t b) {
     }
   case SYNC2:
     if (b == 0x98) {
-      state_ = SYNC3;
+      state_ = PARAM1;
       return false;
     } else {
       state_ = SYNC1;
